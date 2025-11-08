@@ -3,70 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📦 Smart File Compressor</title>
+  <title>📦 All-in-One Converter & Compressor</title>
+
+  <!-- jsPDF (for Image → PDF) and pdf.js (for PDF → Images) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.172/pdf.min.js"></script>
+
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- ===== HEADER ===== -->
-  <header>
-    <h1>📦 Smart File Compressor</h1>
-    <p>Compress multiple images or files easily — works entirely offline in your browser.</p>
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="brand">📦 All-in-One Converter</div>
+    <div class="controls-top">
+      <a href="canscanner.html" class="camscanner-btn">📸 CamScanner</a>
+      <label class="theme-toggle">
+        <input id="themeSwitch" type="checkbox" />
+        <span>🌙 Dark</span>
+      </label>
+      <button id="helpBtn" class="icon">❔</button>
+    </div>
   </header>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <main class="container">
-    <!-- File Input -->
-    <div class="file-box">
-      <input type="file" id="fileInput" accept="image/*,video/*,.pdf,.txt,.zip" multiple />
-    </div>
+  <!-- ===== MAIN PAGE ===== -->
+  <main class="page">
 
-    <!-- Target Size Selection -->
-    <div class="options">
-      <label for="sizeSelect">🎯 Target Size:</label>
-      <select id="sizeSelect">
-        <option value="20">20 KB</option>
-        <option value="100">100 KB</option>
-        <option value="500">500 KB</option>
-        <option value="1024" selected>1 MB</option>
-        <option value="custom">Custom</option>
-      </select>
-      <input 
-        type="text" 
-        id="sizeInput" 
-        placeholder="Enter custom size (e.g. 750KB or 2MB)" 
-        style="display: none; margin-top: 8px;" 
-      />
-    </div>
+    <!-- ===== ACTION BUTTONS SECTION (Now directly below header) ===== -->
+    <section class="panel actions-panel">
+      <div class="row actions">
+        <button id="compressBtn">🔧 Compress & Convert</button>
+        <button id="imgToPdfBtn">📄 Images → PDF</button>
+        <button id="pdfToImgBtn">🖼️ PDF → Images</button>
+        <button id="downloadAllBtn" disabled>⬇ Download All</button>
+        <button id="imgToTextBtn">🧠 Image → Text</button>
+        <button id="pdfToTextBtn">📄 PDF → Text</button>
+        <button id="textToImgBtn">🖋️ Text → Image</button>
+        <button id="clearBtn" class="secondary">🧹 Clear</button>
+      </div>
+    </section>
 
-    <!-- Buttons -->
-    <div class="buttons">
-      <button id="compressBtn">🔧 Compress</button>
-      <button id="downloadAllBtn" disabled>⬇ Download All</button>
-      <button id="clearBtn" class="secondary">🧹 Clear</button>
-    </div>
+    <!-- ===== INPUT SECTION (Now below buttons) ===== -->
+    <section class="panel inputs">
+      <!-- Drag & Drop / File Input -->
+      <div class="row">
+        <label class="filebox">
+          <input id="fileInput" type="file" accept="image/*,.pdf" multiple />
+          <div class="filebox-inner">
+            📂 Click or drop files here (images or PDFs)
+          </div>
+        </label>
+      </div>
 
-    <!-- Info & Results -->
-    <div id="info"></div>
-    <div id="results"></div>
+      <!-- Target Size + Format Selection -->
+      <div class="row two">
+        <!-- Target Size -->
+        <div>
+          <label>🎯 Target Size</label>
+          <select id="sizeSelect" title="Target size in KB">
+            <option value="20">20 KB</option>
+            <option value="50">50 KB</option>
+            <option value="100">100 KB</option>
+            <option value="500">500 KB</option>
+            <option value="1024" selected>1 MB</option>
+            <option value="custom">Custom</option>
+          </select>
+          <input
+            id="sizeInput"
+            placeholder="e.g. 750KB or 2MB"
+            style="display: none; margin-top: 8px;"
+          />
+        </div>
+
+        <!-- Format Selection -->
+        <div>
+          <label>🖼️ Convert / Export Format</label>
+          <select id="formatSelect">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+            <option value="image/bmp">BMP</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="info" class="info"></div>
+    </section>
+
+    <!-- ===== RESULTS PANEL ===== -->
+    <section id="results" class="panel results"></section>
   </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer>
-    <p>💡 Works completely offline — no data leaves your browser. Made with ❤️ using HTML5 Canvas.</p>
+  <footer class="bottom">
+    <div>
+      💡 Works fully client-side — your files never leave your device.<br />
+      PDF→Images requires online access to load the pdf.js library.
+    </div>
   </footer>
 
-  <!-- ===== SCRIPTS ===== -->
-  <script>
-    // === Custom Size Input Toggle ===
-    const sizeSelect = document.getElementById('sizeSelect');
-    const sizeInput = document.getElementById('sizeInput');
-
-    sizeSelect.addEventListener('change', () => {
-      sizeInput.style.display = sizeSelect.value === 'custom' ? 'block' : 'none';
-    });
-  </script>
-
+  <!-- OCR (Text Recognition) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
