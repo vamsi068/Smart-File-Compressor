@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📦 Smart File Compressor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>📦 Smart File Compressor</h1>
+    <p>Compress multiple images or files easily — works entirely offline in your browser.</p>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="container">
+    <!-- File Input -->
+    <div class="file-box">
+      <input type="file" id="fileInput" accept="image/*,video/*,.pdf,.txt,.zip" multiple />
+    </div>
+
+    <!-- Target Size Selection -->
+    <div class="options">
+      <label for="sizeSelect">🎯 Target Size:</label>
+      <select id="sizeSelect">
+        <option value="20">20 KB</option>
+        <option value="100">100 KB</option>
+        <option value="500">500 KB</option>
+        <option value="1024" selected>1 MB</option>
+        <option value="custom">Custom</option>
+      </select>
+      <input 
+        type="text" 
+        id="sizeInput" 
+        placeholder="Enter custom size (e.g. 750KB or 2MB)" 
+        style="display: none; margin-top: 8px;" 
+      />
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <button id="compressBtn">🔧 Compress</button>
+      <button id="downloadAllBtn" disabled>⬇ Download All</button>
+      <button id="clearBtn" class="secondary">🧹 Clear</button>
+    </div>
+
+    <!-- Info & Results -->
+    <div id="info"></div>
+    <div id="results"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>💡 Works completely offline — no data leaves your browser. Made with ❤️ using HTML5 Canvas.</p>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // === Custom Size Input Toggle ===
+    const sizeSelect = document.getElementById('sizeSelect');
+    const sizeInput = document.getElementById('sizeInput');
+
+    sizeSelect.addEventListener('change', () => {
+      sizeInput.style.display = sizeSelect.value === 'custom' ? 'block' : 'none';
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
