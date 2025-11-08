@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📸 CamScanner - Smart File Tool</title>
+  <link rel="stylesheet" href="canscanner.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">📸 CamScanner</div>
+    <div class="controls-top">
+      <a href="index.html" class="back-btn">⬅ Back</a>
+    </div>
+  </header>
+
+  <main class="scanner-container">
+    <!-- Camera Controls -->
+    <section class="controls">
+      <button id="startCameraBtn">📷 Start Camera</button>
+      <button id="captureBtn" disabled>📸 Capture</button>
+      <button id="downloadBtn" disabled>⬇ Download</button>
+      <button id="pdfBtn" disabled>📄 Convert to PDF</button>
+      <button id="clearBtn" class="secondary">🧹 Clear</button>
+    </section>
+
+    <!-- Video Stream & Preview -->
+    <section class="scanner-view">
+      <video id="cameraView" autoplay playsinline></video>
+      <canvas id="snapshot" style="display:none;"></canvas>
+      <div id="previewArea"></div>
+    </section>
+
+    <!-- Scanned Files List -->
+    <section id="scannedList" class="results">
+      <h3>🗂️ Scanned Files</h3>
+      <div id="scannedItems"></div>
+    </section>
+  </main>
+
+  <footer class="bottom">
+    <p>💡 Works offline — captures images and converts to PDF directly in your browser.</p>
+  </footer>
+
+  <script src="canscanner.js"></script>
+</body>
+</html>
