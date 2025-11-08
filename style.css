@@ -1,16 +1,23 @@
 /* =========================================================
-   SMART FILE COMPRESSOR — FINAL MERGED STYLES
+   SMART FILE COMPRESSOR + CONVERTER — v6 PRO GLASS EDITION (2025)
+   Unified: v5.5 (Blue) + v5 Pro UI (Teal Black)
    ========================================================= */
 
 /* ==== ROOT VARIABLES ==== */
 :root {
-  --blue: #007bff;
-  --blue-dark: #0056b3;
-  --dark: #222;
-  --light: #f8fafc;
-  --white: #fff;
-  --gray: #666;
-  --radius: 12px;
+  --primary: #14b8a6;          /* Teal accent */
+  --primary-hover: #0d9488;
+  --accent-gradient: linear-gradient(135deg, #0d9488, #10b981);
+  --bg: #f9fafc;
+  --bg-panel: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #f59e0b;
 }
 
 /* ==== RESET ==== */
@@ -19,210 +26,430 @@
   margin: 0;
   padding: 0;
 }
-
-/* ==== BODY ==== */
+html, body {
+  height: 100%;
+  font-family: "Inter", "Poppins", "Segoe UI", system-ui, sans-serif;
+  scroll-behavior: smooth;
+}
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #dfe9f3, #ffffff);
-  color: var(--dark);
+  background: var(--bg);
+  color: var(--text);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* ==== HEADER ==== */
-header {
-  background: var(--blue);
-  color: var(--white);
-  text-align: center;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+.topbar {
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
 }
-
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 6px;
+.topbar .brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
-
-header p {
-  font-size: 0.95rem;
+.topbar .controls-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.icon, .theme-toggle {
+  cursor: pointer;
+  font-size: 1rem;
+  color: #fff;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.icon:hover, .theme-toggle:hover {
+  transform: scale(1.15);
   opacity: 0.9;
 }
 
-/* ==== MAIN CONTAINER ==== */
-.container {
-  flex: 1;
-  max-width: 900px;
-  margin: 30px auto;
-  background: var(--white);
-  padding: 25px 30px;
-  border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* ==== FILE INPUT ==== */
-.file-box {
+/* =========================================================
+   HEADER / HERO SECTION
+   ========================================================= */
+header {
   text-align: center;
-  margin-bottom: 15px;
+  padding: 2.5rem 1rem;
+  background: #111;
+  color: #fff;
+  border-bottom: 1px solid #222;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+header p {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #d1d5db;
 }
 
-input[type="file"] {
-  border: 2px dashed var(--blue);
+/* =========================================================
+   MAIN PANEL / CONTAINER
+   ========================================================= */
+.panel, .container, .page {
+  flex: 1;
+  max-width: 950px;
+  width: 95%;
+  margin: 2rem auto;
+  background: var(--bg-panel);
   border-radius: var(--radius);
-  padding: 20px;
-  width: 100%;
+  padding: 32px;
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+}
+.panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================================================
+   FILE UPLOAD BOX — MODERN GLASS DRAG & DROP STYLE
+   ========================================================= */
+.filebox {
+  position: relative;
+  text-align: center;
+  padding: 70px 20px;
+  border: 2.5px dashed var(--primary);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, #f8fafc, #ffffff);
+  color: #374151;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.35s ease;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: inset 0 0 25px rgba(20, 184, 166, 0.05);
 }
 
-input[type="file"]:hover {
-  background: #f3f8ff;
+.filebox::before {
+  content: "📁 Drag & Drop Files Here";
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-hover);
+  margin-bottom: 10px;
+  opacity: 0.9;
+  transition: 0.3s;
 }
 
-/* ==== OPTIONS ==== */
-.options {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+.filebox:hover {
+  background: linear-gradient(135deg, #ecfdf5, #ffffff);
+  transform: translateY(-2px);
+  border-color: var(--primary-hover);
+  box-shadow: 0 8px 25px rgba(20, 184, 166, 0.25);
 }
 
-select,
-#sizeInput {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: var(--radius);
-  font-size: 0.95rem;
+.filebox.dragover {
+  background: var(--accent-gradient);
+  color: #fff;
+  border-color: transparent;
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(20, 184, 166, 0.45);
 }
 
-#sizeInput {
+.filebox.dragover::before {
+  content: "⬆ Drop to Upload";
+  color: #fff;
+  font-size: 1.3rem;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.filebox input {
   display: none;
-  width: 60%;
 }
 
-/* ==== BUTTONS ==== */
-.buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+.filebox-inner {
+  font-size: 1rem;
+  color: #6b7280;
+  transition: color 0.3s ease;
 }
 
-button {
-  background: var(--blue);
-  color: var(--white);
-  border: none;
-  padding: 10px 16px;
+.filebox:hover .filebox-inner {
+  color: var(--primary-hover);
+}
+
+.inputs {
+  margin-top: 2rem;
+}
+.filebox {
+  display: block;
+  border: 2px dashed var(--primary);
   border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
   cursor: pointer;
-  font-weight: 500;
+  transition: 0.3s;
+}
+.filebox:hover {
+  background: #f1fdfa;
+}
+.filebox-inner {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ==== DARK MODE ==== */
+body.dark .filebox {
+  background: rgba(30, 41, 59, 0.45);
+  border-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  box-shadow: inset 0 0 25px rgba(13, 148, 136, 0.2);
+  color: #e2e8f0;
+}
+body.dark .filebox:hover {
+  background: rgba(15, 23, 42, 0.65);
+  border-color: var(--primary);
+  box-shadow: 0 0 25px rgba(20, 184, 166, 0.5);
+}
+body.dark .filebox.dragover {
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.8), rgba(16, 185, 129, 0.9));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 50px rgba(13, 148, 136, 0.8);
+}
+
+
+/* =========================================================
+   INPUTS / OPTIONS
+   ========================================================= */
+.inputs, .options {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: center;
+}
+select, input[type="text"], #sizeInput {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
   font-size: 0.95rem;
-  transition: all 0.2s ease;
+  transition: border 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
 }
+select:focus, input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.25);
+}
+#sizeInput { display: none; }
 
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.buttons, .actions {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+button {
+  border: none;
+  border-radius: var(--radius);
+  padding: 11px 20px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(20, 184, 166, 0.3);
+}
 button:hover {
-  background: var(--blue-dark);
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(20, 184, 166, 0.4);
 }
-
 button.secondary {
-  background: #ccc;
-  color: var(--dark);
+  background: #e2e8f0;
+  color: #111;
 }
-
+button.secondary:hover {
+  background: #d1d5db;
+  transform: translateY(-1px);
+}
 button:disabled {
-  background: #cccccc;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* ==== RESULTS SECTION ==== */
-#results {
-  margin-top: 25px;
+/* =========================================================
+   RESULTS GRID
+   ========================================================= */
+#results, .results {
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
-
-.result {
-  background: var(--white);
+.result-card, .result {
+  background: var(--bg-panel);
   border-radius: var(--radius);
-  padding: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
+  padding: 18px;
   text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-
-.result img,
-.result video {
-  max-width: 100%;
-  height: 160px;
+.result-card:hover, .result:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+.result-card img, .result img {
+  width: 100%;
+  height: 180px;
   object-fit: cover;
   border-radius: var(--radius);
-  margin-bottom: 8px;
 }
-
 .meta {
-  flex: 1;
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--text);
 }
-
-.meta p {
+.small {
   font-size: 0.85rem;
-  margin: 3px 0;
-  color: var(--gray);
+  color: var(--text-muted);
 }
 
-/* ==== PROGRESS BAR ==== */
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
 .progress {
   height: 8px;
-  background: #e0e0e0;
-  border-radius: 6px;
+  background: #f1f5f9;
+  border-radius: 8px;
   overflow: hidden;
   margin-top: 6px;
 }
-
 .bar {
   height: 100%;
   width: 0%;
-  background: var(--blue);
+  background: var(--primary);
   transition: width 0.3s ease;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
-/* ==== INFO ==== */
-#info {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: var(--gray);
-  text-align: center;
+/* =========================================================
+   TEXT RESULT CARD
+   ========================================================= */
+.text-card textarea {
+  width: 100%;
+  height: 150px;
+  resize: vertical;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  font-family: monospace;
+  background: #f8fafc;
+  color: var(--text);
 }
 
-/* ==== FOOTER ==== */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 footer {
+  background: #000;
+  color: #fff;
   text-align: center;
-  padding: 12px;
-  background: var(--light);
-  font-size: 0.85rem;
-  color: var(--gray);
-  border-top: 1px solid #eee;
+  padding: 18px;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+  transition: background 0.4s ease;
 }
 
-/* ==== RESPONSIVE ==== */
-@media (max-width: 600px) {
-  .container {
-    margin: 20px;
-    padding: 20px;
-  }
-
-  header h1 {
-    font-size: 1.6rem;
-  }
-
-  input[type="file"] {
-    padding: 16px;
-  }
-
-  button {
-    font-size: 0.9rem;
-    padding: 8px 12px;
-  }
+/* =========================================================
+   DARK MODE — GLASS EFFECT ✨
+   ========================================================= */
+body.dark {
+  backdrop-filter: blur(12px);
+  background: radial-gradient(circle at 20% 20%, #0b1121, #030712);
+  color: #e2e8f0;
 }
+body.dark .topbar,
+body.dark header,
+body.dark footer {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(14px);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+body.dark .panel,
+body.dark .result-card {
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+body.dark .filebox {
+  background: rgba(23, 37, 84, 0.35);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+body.dark button {
+  background: linear-gradient(135deg, #0d9488, #10b981);
+  box-shadow: 0 0 16px rgba(13, 148, 136, 0.6);
+}
+body.dark button:hover {
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  box-shadow: 0 0 20px rgba(13, 148, 136, 0.7);
+}
+body.dark .text-card textarea {
+  background: rgba(15, 23, 42, 0.8);
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 650px) {
+  header h1 { font-size: 1.7rem; }
+  .inputs { grid-template-columns: 1fr; }
+  .panel { padding: 22px; margin: 1.2rem; }
+  .result-card img { height: 130px; }
+}
+
+.camscanner-btn {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: 0.3s;
+}
+.camscanner-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+
+.actions-panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background: rgba(255,255,255,0.8);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.actions-panel .actions button {
+  margin: 6px;
+  min-width: 150px;
+}
+
